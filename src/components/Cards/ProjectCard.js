@@ -15,6 +15,8 @@ import {
 import { BsPlusCircleFill } from "react-icons/bs";
 import ProjectModal from "../Modal/ProjectModal";
 
+import Link from "next/link";
+
 const variants = {
   pageInitial: {
     opacity: 0,
@@ -36,8 +38,7 @@ const ProjectCard = ({ item }) => {
   const openModal = () => setIsOpen(true);
   const toggleModal = () => setIsOpen(!isOpen);
 
-  const { title, description, tags, image, imageWebp, images } =
-    item;
+  const { title, description, tags, image, imageWebp, projectURL } = item;
 
   return (
     <motion.div
@@ -49,13 +50,14 @@ const ProjectCard = ({ item }) => {
       variants={variants}
       transition={{ type: "tween" }}
     >
-      <ImgContainer>
-        <Picture>
-          <source srcSet={imageWebp} type="image/webp" />
-          <PictureImg src={image} alt={title} />
-        </Picture>
+      <Link href={projectURL}>
+        <ImgContainer>
+          <Picture>
+            <source srcSet={imageWebp} type="image/webp" />
+            <PictureImg src={image} alt={title} />
+          </Picture>
 
-        <Button
+          {/* <Button
           type="button"
           aria-label="Open Project Gallery in a modal window"
           onClick={openModal}
@@ -67,8 +69,9 @@ const ProjectCard = ({ item }) => {
           toggleModal={toggleModal}
           title={title}
           images={images}
-        />
-      </ImgContainer>
+        /> */}
+        </ImgContainer>
+      </Link>
       <TitleContent>
         <HeaderThree title>{title}</HeaderThree>
         <Hr />
